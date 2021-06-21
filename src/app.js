@@ -11,6 +11,9 @@ import {
 
 import LogoutButton from './LogoutButton';
 import Profile from './Profile';
+import BestBooks from './myFavoriteBooks';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class App extends React.Component {
 
@@ -25,6 +28,10 @@ class App extends React.Component {
                 <Route exact path="/">
                 
                   {/* TODO: if the user is logged in, render the `MyFavoriteBooks` component, if they are not, render the `Login` component */}
+                 <BestBooks />
+                  </Route>
+
+                  <Route path='/Profile'>
                   </Route>
                 {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
               </Switch>
