@@ -2,37 +2,73 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import './myFavoriteBooks.css';
-import BookCorsal from './BookCorsal';
 import axios from 'axios';
-
+import Carousel from 'react-bootstrap/Carousel';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class MyFavoriteBooks extends React.Component {
-  constructor(props){
+
+  constructor(props) {
     super(props);
     this.state = {
-      books:[],
-    }
+      bookData: [],
+      email: ''
+
+
+    };
+
   }
 
-  async componentDidMount() {
-    const email = this.props.auth0.user.email;
-    const booksReq = await axios.get(`${process.env.REACT_APP}/books?email=${email}`);
-    await this.setState({books:booksReq.data});
+  componentDidMount = () => {
+
+
+    // const paramsObj = {
+    //   email: this.props.auth0.user.email
+    // }
+    let server = process.env.REACT_APP_SERVER_URL;
+    let bookUrl = `${server}/books?email=${this.props.auth0.user.email}`;
+
+
+    axios.get(bookUrl).then((bookResult) => {
+      let dataBook = bookResult.data;
+      this.setState({
+        bookData: dataBook
+      })
+    });
+
   }
+
   render() {
-    return(
-      <Jumbotron>
+   
+    return (
+      <>
         
-        <h1>My Favorite Books</h1>
-        <p>
-          This is a collection of my favorite books
-        </p>
-        <div>
-          <BookCorsal books={this.state.books} />
-          </div>
-      </Jumbotron>
+        <Jumbotron>
+
+
+        </Jumbotron>
+        <Carousel>
+          {this.state.bookData.map((item) => (
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={item.status}
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h3>{item.name}</h3>
+                <p>{item.description}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))
+
+
+          }
+        </Carousel>
+      </>
+
     )
   }
 }
 
-export default MyFavoriteBooks;
+export default withAuth0(MyFavoriteBooks);
