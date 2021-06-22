@@ -8,6 +8,7 @@ class Profile extends Component {
         <>
         {isAuthenticated && <div>Hello {user.name}</div>}
         {isAuthenticated && <div>Email: {user.email}</div>}
+        {isAuthenticated && <img src= {user.picture} alt='img' />}
         </>
     )
     ;
