@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './header';
-import IsLoadingAndError from './IsLoadingAndError';
+
 import Footer from './footer';
 import { withAuth0 } from '@auth0/auth0-react';
 import {
@@ -13,8 +13,7 @@ import {
  import  MyFavoriteBooks  from './myFavoriteBooks';
  import  Login  from './login';
  import Profile from './loging/Profile';
- import axios from 'axios';
-
+ 
 class App extends React.Component {
 
 

@@ -6,6 +6,7 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import { withAuth0 } from '@auth0/auth0-react';
 
+
 class MyFavoriteBooks extends React.Component {
 
   constructor(props) {
@@ -22,9 +23,6 @@ class MyFavoriteBooks extends React.Component {
   componentDidMount = () => {
 
 
-    // const paramsObj = {
-    //   email: this.props.auth0.user.email
-    // }
     let server = process.env.REACT_APP_SERVER_URL;
     let bookUrl = `${server}/books?email=${this.props.auth0.user.email}`;
 
@@ -44,10 +42,13 @@ class MyFavoriteBooks extends React.Component {
       <>
         
         <Jumbotron>
-
-
+        <h1>My Favorite Books</h1>
+        <p>
+          This is a collection of my favorite books :
+        </p>
+       
         </Jumbotron>
-        <Carousel>
+        {/* <Carousel>
           {this.state.bookData.map((item) => (
             <Carousel.Item>
               <img
@@ -58,13 +59,18 @@ class MyFavoriteBooks extends React.Component {
               <Carousel.Caption>
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
+                <p>{item.image_url}</p>
+                
+
+
               </Carousel.Caption>
             </Carousel.Item>
           ))
 
 
           }
-        </Carousel>
+        </Carousel> */}
+       
       </>
 
     )
